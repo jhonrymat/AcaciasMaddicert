@@ -12,6 +12,7 @@ use App\Models\Tdocumento;
 use App\Models\Tsolicitante;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class FormularioComponent extends Component
 {
@@ -41,6 +42,13 @@ class FormularioComponent extends Component
     public $terminos = '';
     public $observaciones = '';
 
+    //para el campo ubicacion 
+
+    public $paises = [];
+    public $ciudades = [];
+    public $seleccion_pais = null;
+    public $seleccion_ciudad = null; 
+
 
 
     protected $rules = [
@@ -68,6 +76,25 @@ class FormularioComponent extends Component
         'observaciones.string' => 'El campo observaciones debe ser una cadena de texto.',
     ];
 
+    public function mount(){
+        $this->paises = collect(Http::get('https://restcountries.com/v3.1/all')->json())
+        ->sortBy('name.common') // Ordena los países alfabéticamente por su nombre
+        ->values() // Reindexa el array después de ordenar
+        ->toArray();
+    }
+    
+
+    public function updatedSeleccionPais($countryCode)
+    {
+        // Llama a la API para obtener las ciudades del país seleccionado
+        $response = Http::get("http://api.geonames.org/searchJSON?country=$countryCode&featureClass=P&maxRows=1000&username=andres293");
+        
+        // Ordena las ciudades alfabéticamente por su nombre
+        $this->ciudades = collect($response->json()['geonames'])
+            ->sortBy('name') // Ordena las ciudades por el nombre
+            ->values() // Reindexa la colección después de ordenar
+            ->toArray(); // Convierte de nuevo a un array
+    }
 
 
     public function save()

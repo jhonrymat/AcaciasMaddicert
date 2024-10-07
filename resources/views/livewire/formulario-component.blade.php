@@ -338,12 +338,30 @@
 
             {{-- input para que el usuario escriba su ubicacion --}}
             <div class="mb-4">
-                <x-label for="ubicacion" class="block text-sm font-medium">Ubicación</x-label>
-                <input type="text" wire:model="ubicacion" id="ubicacion" class="mt-1 block w-full border border-gray-300 rounded-lg">
-                @error('ubicacion')
+                <x-label for="pais" class="block text-sm font-medium">Ciudad</x-label>
+                <select name="pais" wire:model="seleccion_pais" class="block mt-1 w-full border border-gray-300 rounded-lg">
+                    <option value="" selected>-- Selecciona un País --</option>
+                    @foreach ($paises as $pais)
+                        <option value="{{ $pais['cca2']}}">{{ $pais['name']['common'] }}</option>
+                    @endforeach
+                </select>
+                @error('id_barrio')
                     <span class="text-red-500">{{ $message }}</span>
                 @enderror
             </div>
+
+            
+                @if (!is_null($seleccion_pais))
+                    <div class="mb-4">
+                        <x-label for="cuidad" class="block text-sm font-medium">Ciudad</x-label>
+                        <select name="cuidad" wire:model="seleccion_ciudad" class="block mt-1 w-full border border-gray-300 rounded-lg">
+                            <option value="">-- Selecciona una Ciudad --</option>
+                            @foreach($ciudades as $ciudad)
+                            <option value="{{ $ciudad['geonameId'] }}">{{ $ciudad['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+            @endif
 
             {{-- observaciones --}}
             <div class="mb-4">
