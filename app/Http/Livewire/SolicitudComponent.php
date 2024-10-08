@@ -131,7 +131,7 @@ class SolicitudComponent extends Component
         $this->existingPDF = null;
     }
 
-
+//datos del model
     
     public function render()
     {
