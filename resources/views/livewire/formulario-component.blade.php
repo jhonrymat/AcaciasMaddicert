@@ -322,7 +322,7 @@
             </div>
             <!-- Modal con Alpine.js y Livewire -->
 
-            {{-- barrio --}}
+            {{-- barrio --}} 
             <div class="mb-4">
                 <x-label for="id_barrio" class="block text-sm font-medium">Barrio</x-label>
                 <select name="id_barrio" id="id_barrio" wire:model="id_barrio" class="block mt-1 w-full border border-gray-300 rounded-lg">
@@ -337,12 +337,13 @@
             </div>
 
             {{-- input para que el usuario escriba su ubicacion --}}
+            {{-- seleccion pais --}} 
             <div class="mb-4">
-                <x-label for="pais" class="block text-sm font-medium">Ciudad</x-label>
+                <x-label for="pais" class="block text-sm font-medium">Pais</x-label>
                 <select name="pais" wire:model="seleccion_pais" class="block mt-1 w-full border border-gray-300 rounded-lg">
-                    <option value="" selected>-- Selecciona un País --</option>
+                    <option value="" selected> Selecciona un País </option>
                     @foreach ($paises as $pais)
-                        <option value="{{ $pais['cca2']}}">{{ $pais['name']['common'] }}</option>
+                        <option value="{{ $pais['geonameId'] }}">{{ $pais['countryName'] }}</option>
                     @endforeach
                 </select>
                 @error('id_barrio')
@@ -350,8 +351,21 @@
                 @enderror
             </div>
 
+            <!-- Selector Departamento -->
             
-                @if (!is_null($seleccion_pais))
+            @if (!is_null($seleccion_pais) && ($seleccion_pais == 3686110))
+            <div class="mb-4">
+                <x-label for="departamento" class="block text-sm font-medium">Departamento/Estado/Provincia</x-label>
+                <select name="departamento" id="departamento" wire:model="seleccion_departamento" class="block mt-1 w-full border border-gray-300 rounded-lg">
+                    <option value=""> Selecciona un Departamento </option>
+                    @foreach($departamentos as $departamento)
+                        <option value="{{ $departamento['geonameId'] }}">{{ $departamento['name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endif
+            
+            @if (!is_null($seleccion_departamento) && ($seleccion_pais == 3686110))
                     <div class="mb-4">
                         <x-label for="cuidad" class="block text-sm font-medium">Ciudad</x-label>
                         <select name="cuidad" wire:model="seleccion_ciudad" class="block mt-1 w-full border border-gray-300 rounded-lg">

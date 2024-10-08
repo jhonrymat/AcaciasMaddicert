@@ -46,8 +46,10 @@ class FormularioComponent extends Component
 
     public $paises = [];
     public $ciudades = [];
+    public $departamentos = [];
     public $seleccion_pais = null;
     public $seleccion_ciudad = null; 
+    public $seleccion_departamento = null;
 
 
 
@@ -77,24 +79,40 @@ class FormularioComponent extends Component
     ];
 
     public function mount(){
-        $this->paises = collect(Http::get('https://restcountries.com/v3.1/all')->json())
-        ->sortBy('name.common') // Ordena los países alfabéticamente por su nombre
+        // Llama a la API de GeoNames para obtener la lista de países
+        $response = Http::get('http://api.geonames.org/countryInfoJSON?username=andres293');
+
+        // Accede al array correcto para obtener los países
+        $this->paises = collect($response->json()['geonames']) // Asegurarse de acceder a la clave 'geonames'
+        ->sortBy('countryName') // Ordena los países alfabéticamente por su nombre
         ->values() // Reindexa el array después de ordenar
-        ->toArray();
+        ->toArray(); // Convierte de nuevo a un array
     }
     
-
     public function updatedSeleccionPais($countryCode)
-    {
-        // Llama a la API para obtener las ciudades del país seleccionado
-        $response = Http::get("http://api.geonames.org/searchJSON?country=$countryCode&featureClass=P&maxRows=1000&username=andres293");
-        
-        // Ordena las ciudades alfabéticamente por su nombre
-        $this->ciudades = collect($response->json()['geonames'])
-            ->sortBy('name') // Ordena las ciudades por el nombre
-            ->values() // Reindexa la colección después de ordenar
-            ->toArray(); // Convierte de nuevo a un array
-    }
+{
+    // Llama a la API para obtener los departamentos del país seleccionado
+    $response = Http::get("http://api.geonames.org/childrenJSON?geonameId=$countryCode&username=andres293");
+    $this->departamentos = collect($response->json()['geonames'])
+        ->sortBy('name')
+        ->values()
+        ->toArray();
+
+    $this->seleccion_departamento = null; // Reiniciar la selección de departamento
+    $this->ciudades = []; // Limpiar la lista de ciudades
+}
+
+public function updatedSeleccionDepartamento($departamentoId)
+{
+    // Llama a la API para obtener las ciudades del departamento seleccionado
+    $response = Http::get("http://api.geonames.org/childrenJSON?geonameId=$departamentoId&username=andres293");
+    $this->ciudades = collect($response->json()['geonames'])
+        ->sortBy('name')
+        ->values()
+        ->toArray();
+
+    $this->seleccion_ciudad = null; // Reiniciar la selección de ciudad
+}
 
 
     public function save()
