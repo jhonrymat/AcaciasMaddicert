@@ -112,10 +112,33 @@ class RolesAndPermissionsTenantSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+            // Crear el usuario user
+        $jonathan = User::firstOrCreate(
+            ['email' => 'jonathan@gmail.com'],
+            [
+                'name' => 'jonathan',
+                'nombre_2' => 'Fabian',
+                'apellido_1' => 'cruz',
+                'apellido_2' => 'Rincon',
+                'telefonoContacto' => '3145687894',
+                'id_tipoSolicitante' => 1,
+                'id_tipoDocumento' => 1,
+                'numeroIdentificacion' => '1111111111',
+                'ciudadExpedicion' => 'acacias',
+                'fechaNacimiento' => '1980-01-12 00:00:00',
+                'id_nivelEstudio' => 1,
+                'id_genero' => 1,
+                'id_ocupacion' => 1,
+                'id_poblacion' => 1,
+                'password' => Hash::make('1q2w3e4r'),
+                'email_verified_at' => now(),
+            ]
+        );
 
         // Asignar el rol de administrador al usuario
         $admin->assignRole('admin');
         $user->assignRole('user');
+        $jonathan->assignRole('user');
 
 
     }
