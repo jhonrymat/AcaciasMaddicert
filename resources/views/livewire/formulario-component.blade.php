@@ -336,14 +336,6 @@
                 @enderror
             </div>
 
-            {{-- input para que el usuario escriba su ubicacion --}}
-            <div class="mb-4">
-                <x-label for="ubicacion" class="block text-sm font-medium">Ubicación</x-label>
-                <input type="text" wire:model="ubicacion" id="ubicacion" class="mt-1 block w-full border border-gray-300 rounded-lg">
-                @error('ubicacion')
-                    <span class="text-red-500">{{ $message }}</span>
-                @enderror
-            </div>
 
             {{-- observaciones --}}
             <div class="mb-4">

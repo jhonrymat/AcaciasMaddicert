@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('numeroIdentificacion', 50);
             $table->unsignedBigInteger('id_barrio');
+            
             $table->string('direccion', 100);
             $table->string('ubicacion', 100);
             $table->text('evidenciaPDF');

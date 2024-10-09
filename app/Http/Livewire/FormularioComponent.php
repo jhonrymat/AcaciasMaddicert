@@ -12,6 +12,7 @@ use App\Models\Tdocumento;
 use App\Models\Tsolicitante;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class FormularioComponent extends Component
 {
@@ -43,6 +44,8 @@ class FormularioComponent extends Component
 
 
 
+
+
     protected $rules = [
         'numeroIdentificacion' => 'required|string|min:3',
         'id_barrio' => 'required',
@@ -67,8 +70,6 @@ class FormularioComponent extends Component
         'observaciones.required' => 'El campo observaciones es obligatorio.',
         'observaciones.string' => 'El campo observaciones debe ser una cadena de texto.',
     ];
-
-
 
     public function save()
     {
