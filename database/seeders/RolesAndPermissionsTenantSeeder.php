@@ -18,6 +18,22 @@ class RolesAndPermissionsTenantSeeder extends Seeder
      */
     public function run(): void
     {
+        // Crear o asegurarse de que el rol de administrador existe
+        $adminRole = Role::firstOrCreate([
+            'name' => 'admin',
+            'guard_name' => 'web',
+        ]);
+
+        $userRole = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
+        ]);
+
+        $validadorRole = Role::firstOrCreate([
+            'name' => 'validador',
+            'guard_name' => 'web',
+        ]);
+
         // Crear permisos
 
 
@@ -29,12 +45,25 @@ class RolesAndPermissionsTenantSeeder extends Seeder
             'tsolicitante',
             'barrio',
             'solicitudes',
+            'poblacion',
+            'ocupacion',
             'roles',
             'permisos',
         ];
         $permissionsUser = [
             'formulario',
             'versolicitudes',
+        ];
+        $permissionsValidador =[
+            'documento',
+            'genero',
+            'nestudio',
+            'tsolicitante',
+            'barrio',
+            'solicitudes',
+            'formulario',
+            'versolicitudes',
+            
         ];
 
         // Crear los permisos
@@ -51,22 +80,22 @@ class RolesAndPermissionsTenantSeeder extends Seeder
                 'guard_name' => 'web',
             ]);
         }
+        foreach ($permissionsValidador as $permission) {
+            Permission::firstOrCreate([
+                'name' => $permission,
+                'guard_name' => 'web',
+            ]);
+        }
 
-        // Crear o asegurarse de que el rol de administrador existe
-        $adminRole = Role::firstOrCreate([
-            'name' => 'admin',
-            'guard_name' => 'web',
-        ]);
+        
 
-        $userRole = Role::firstOrCreate([
-            'name' => 'user',
-            'guard_name' => 'web',
-        ]);
 
         // Asignar todos los permisos al rol de administrador
         $adminRole->syncPermissions($permissionsAdmin);
         // Asignar todos los permisos al rol de administrador
         $userRole->syncPermissions($permissionsUser);
+
+        $validadorRole->syncPermissions($permissionsValidador);
 
         // Crear el usuario administrador
         $admin = User::firstOrCreate(
@@ -113,8 +142,8 @@ class RolesAndPermissionsTenantSeeder extends Seeder
             ]
         );
             // Crear el usuario user
-        $jonathan = User::firstOrCreate(
-            ['email' => 'jonathan@gmail.com'],
+        $validador = User::firstOrCreate(
+            ['email' => 'validador@gmail.com'],
             [
                 'name' => 'jonathan',
                 'nombre_2' => 'Fabian',
@@ -138,7 +167,7 @@ class RolesAndPermissionsTenantSeeder extends Seeder
         // Asignar el rol de administrador al usuario
         $admin->assignRole('admin');
         $user->assignRole('user');
-        $jonathan->assignRole('user');
+        $validador->assignRole('validador');
 
 
     }

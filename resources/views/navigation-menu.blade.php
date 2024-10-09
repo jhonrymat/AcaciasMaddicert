@@ -52,6 +52,12 @@
                                     <x-dropdown-link href="{{ route('barrio') }}">
                                         {{ __('Barrios') }}
                                     </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('ocupacion') }}">
+                                        {{ __('Ocupacion') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('poblacion') }}">
+                                        {{ __('Poblacion') }}
+                                    </x-dropdown-link>
                                 </x-slot>
                             </x-dropdown>
                         </div>
@@ -67,6 +73,62 @@
                             {{ __('solicitudes') }}
                         </x-nav-link>
                     @endrole
+                    
+                    @role('validador')
+
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <x-dropdown width="48">
+                            <x-slot name="trigger">
+                                <span class="inline-flex rounded-md">
+                                    <button type="button"
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                        Cruds
+
+                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </button>
+                                </span>
+                            </x-slot>
+                            <x-slot name="content">
+                                <!-- Account Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Datos') }}
+                                </div>
+                                <x-dropdown-link href="{{ route('documento') }}">
+                                    {{ __('Documentos') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('genero') }}">
+                                    {{ __('Generos') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('nestudio') }}">
+                                    {{ __('Nivel de estudios') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('tsolicitante') }}">
+                                    {{ __('Tipo de solicitante') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('barrio') }}">
+                                    {{ __('Barrios') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('poblacion') }}">
+                                    {{ __('Poblacion') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('ocupacion') }}">
+                                    {{ __('Ocupacion') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+                    <x-nav-link href="{{ route('formulario') }}" :active="request()->routeIs('formulario')">
+                        {{ __('Solicitud') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('versolicitudes') }}" :active="request()->routeIs('versolicitudes')">
+                        {{ __('solicitudes') }}
+                    </x-nav-link>
+                @endrole
+
                 </div>
             </div>
 
