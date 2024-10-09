@@ -30,19 +30,19 @@ class SolicitudDatatable extends DataTableComponent
             Column::make("Id", "id")
                 ->sortable()
                 ->searchable(),
-            Column::make("Fecha de Solicitud", "fechaSolicitud")
+            Column::make("Usuario", "user.name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Número de Identificación", "numeroIdentificacion_id")
+            
+            
+            Column::make("Número de Identificación", "numeroIdentificacion")
                 ->sortable()
                 ->searchable(),
-            Column::make("Fecha Actual", "fechaActual")
-                ->sortable()
-                ->searchable(),
+           
             Column::make("Barrio", "barrio.nombreBarrio")
                 ->sortable()
                 ->searchable(), // Relacionado con la tabla de barrios
-            Column::make("Dirección", "direccion.direccionCompleta")
+            Column::make("Dirección", "direccion")
                 ->sortable()
                 ->searchable(), // Relacionado con la tabla de direcciones
             Column::make("Ubicación", "ubicacion")

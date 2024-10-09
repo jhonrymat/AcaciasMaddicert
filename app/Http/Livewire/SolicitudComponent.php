@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use App\Models\Solicitud;
 use App\Models\Direccion;
 use App\Models\Barrio;
@@ -10,6 +11,7 @@ use Livewire\WithFileUploads; // Para manejar la subida de archivos
 class SolicitudComponent extends Component
 {
     use WithFileUploads;
+
     public function mount()
     {
         if (!auth()->user()->can('solicitudes')) {
@@ -27,6 +29,8 @@ class SolicitudComponent extends Component
     public $existingPDF;
     public $showForm = false;
 
+    
+
     protected $rules = [
         'fechaSolicitud' => 'required|date',
         'numeroIdentificacion_id' => 'required|string|max:50',
@@ -40,6 +44,7 @@ class SolicitudComponent extends Component
     protected $listeners = ['edit', 'delete'];
 
 
+    
 
     public function save()
     {
@@ -98,6 +103,7 @@ class SolicitudComponent extends Component
             $this->showForm = true;
         }
     }
+    
 
     public function create()
     {
@@ -125,11 +131,16 @@ class SolicitudComponent extends Component
         $this->existingPDF = null;
     }
 
+//datos del model
+    
     public function render()
     {
-        return view('livewire.solicitud-component', [
-            'barrios' => Barrio::all(),
-            'direcciones' => Direccion::all()
+        
+       
+         return view('livewire.solicitud-component', [
+            'solicitudes' => Solicitud::with('barrio', 'direccion'), // Paginación de 10 elementos
+            
+           
         ]);
     }
 }

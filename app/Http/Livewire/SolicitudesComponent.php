@@ -8,21 +8,23 @@ use App\Models\Solicitud;
 
 class SolicitudesComponent extends Component
 {
-
-
-    public $id_solicitante;
+    public $nombreCompleto;
+    public $email;
+    public $telefonoContacto;
+    public $id_tipoSolicitante;
+    public $id_tipoDocumento;
     public $numeroIdentificacion;
-    public $id_barrio;
-    public $direccion;
-    public $ubicacion;
-    public $evidenciaPDF;
-    public $genero_id;
+    public $ciudadExpedicion;
+    public $fechaNacimiento;
+    public $id_nivelEstudio;
+    public $id_genero;
+    public $id_ocupacion;
+    public $id_poblacion;
 
-    public $showForm = false; // Control para mostrar/ocultar el formulario
-
+    public $showForm = false; // Control para mostrar/ocultar el modal
     // variabble para mostrar los datos de user en modal
     public $name;
-    public $email;
+    
 
     protected $listeners = ['view'];
 
@@ -31,13 +33,16 @@ class SolicitudesComponent extends Component
         if (!auth()->user()->can('versolicitudes')) {
             abort(403, 'No tienes acceso a esta página.');
         }
+        
     }
 
-    // mostrar datos del user en modal
-    public function view($id){
+    // Método para mostrar los datos del usuario en el modal
+    public function view($id)
+    {
+        $userId = auth()->id();
+        $user = User::find($userId);
 
-        $user = User::find($id);
-        // concatenando los nombres
+        // Concatenando los nombres
         $this->nombreCompleto = $user->name . ' ' . $user->nombre_2 . ' ' . $user->apellido_1 . ' ' . $user->apellido_2;
         $this->email = $user->email;
         $this->telefonoContacto = $user->telefonoContacto;
@@ -51,17 +56,14 @@ class SolicitudesComponent extends Component
         $this->id_ocupacion = $user->id_ocupacion;
         $this->id_poblacion = $user->id_poblacion;
         $this->showForm = true;
-
     }
-
-
-
-
-
 
     public function render()
     {
+        $solicitudes = Solicitud::with('user')->get();
 
-        return view('livewire.solicitudes-component');
+        return view('livewire.solicitudes-component', [
+            'solicitudes' => $solicitudes
+        ]);
     }
 }

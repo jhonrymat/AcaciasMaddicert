@@ -23,7 +23,11 @@ class SolicitudesDatatable extends DataTableComponent
         $this->setDefaultSort('id', 'desc');
         $this->setSingleSortingStatus(false);
     }
-
+    public function builder(): \Illuminate\Database\Eloquent\Builder
+    {
+        $userId = auth()->id(); // Obtén el ID del usuario autenticado
+        return Solicitud::query()->where('user_id', $userId); // Filtra las solicitudes solo para el usuario autenticado
+    }
     public function columns(): array
     {
         return [
@@ -37,7 +41,7 @@ class SolicitudesDatatable extends DataTableComponent
             Column::make("# Identificación", "numeroIdentificacion")
                 ->sortable()
                 ->searchable(),
-            Column::make("Direccion", "id_barrio")
+            Column::make("Barrio", "barrio.nombreBarrio")
                 ->sortable()
                 ->searchable(),
             Column::make("Direccion", "direccion")
@@ -46,7 +50,7 @@ class SolicitudesDatatable extends DataTableComponent
             Column::make("Ubicación", "ubicacion")
                 ->sortable()
                 ->searchable(),
-            Column::make("Created at", "created_at")
+            Column::make("Creado", "created_at")
                 ->sortable()
                 ->searchable(),
             Column::make("Anexos", "evidenciaPDF")

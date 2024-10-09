@@ -11,6 +11,8 @@ use App\Http\Livewire\FormularioComponent;
 use App\Http\Livewire\TdocumentoComponent;
 use App\Http\Livewire\SolicitudesComponent;
 use App\Http\Livewire\TipoSolicitanteComponent;
+use App\Http\Livewire\OcupacionComponent;
+use App\Http\Livewire\PoblacionComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +39,11 @@ Route::middleware(['can:solicitudes'])->get('solicitudes', SolicitudComponent::c
 Route::middleware(['can:roles'])->get('roles', RolesComponent::class)->name('roles');
 Route::middleware(['can:permisos'])->get('permisos', PermisosComponent::class)->name('permisos');
 Route::middleware(['can:formulario'])->get('formulario', FormularioComponent::class)->name('formulario');
-Route::middleware(['can:formulario'])->get('formulario', FormularioComponent::class)->name('formulario');
+Route::middleware(['can:ocupacion'])->get('ocupacion', OcupacionComponent::class)->name('ocupacion');
+Route::middleware(['can:poblacion'])->get('poblacion', PoblacionComponent::class)->name('poblacion');
 Route::middleware(['can:versolicitudes'])->get('versolicitudes', SolicitudesComponent::class)->name('versolicitudes');
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
