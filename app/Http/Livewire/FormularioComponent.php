@@ -42,14 +42,7 @@ class FormularioComponent extends Component
     public $terminos = '';
     public $observaciones = '';
 
-    //para el campo ubicacion 
 
-    public $paises = [];
-    public $ciudades = [];
-    public $departamentos = [];
-    public $seleccion_pais = null;
-    public $seleccion_ciudad = null; 
-    public $seleccion_departamento = null;
 
 
 
@@ -77,43 +70,6 @@ class FormularioComponent extends Component
         'observaciones.required' => 'El campo observaciones es obligatorio.',
         'observaciones.string' => 'El campo observaciones debe ser una cadena de texto.',
     ];
-
-    public function mount(){
-        // Llama a la API de GeoNames para obtener la lista de países
-        $response = Http::get('http://api.geonames.org/countryInfoJSON?username=andres293');
-
-        // Accede al array correcto para obtener los países
-        $this->paises = collect($response->json()['geonames']) // Asegurarse de acceder a la clave 'geonames'
-        ->sortBy('countryName') // Ordena los países alfabéticamente por su nombre
-        ->values() // Reindexa el array después de ordenar
-        ->toArray(); // Convierte de nuevo a un array
-    }
-    
-    public function updatedSeleccionPais($countryCode)
-{
-    // Llama a la API para obtener los departamentos del país seleccionado
-    $response = Http::get("http://api.geonames.org/childrenJSON?geonameId=$countryCode&username=andres293");
-    $this->departamentos = collect($response->json()['geonames'])
-        ->sortBy('name')
-        ->values()
-        ->toArray();
-
-    $this->seleccion_departamento = null; // Reiniciar la selección de departamento
-    $this->ciudades = []; // Limpiar la lista de ciudades
-}
-
-public function updatedSeleccionDepartamento($departamentoId)
-{
-    // Llama a la API para obtener las ciudades del departamento seleccionado
-    $response = Http::get("http://api.geonames.org/childrenJSON?geonameId=$departamentoId&username=andres293");
-    $this->ciudades = collect($response->json()['geonames'])
-        ->sortBy('name')
-        ->values()
-        ->toArray();
-
-    $this->seleccion_ciudad = null; // Reiniciar la selección de ciudad
-}
-
 
     public function save()
     {

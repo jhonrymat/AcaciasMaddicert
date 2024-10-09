@@ -29,7 +29,12 @@ class CreateNewUser implements CreatesNewUsers
             'id_tipoSolicitante' => ['required', 'string', 'max:255'],
             'id_tipoDocumento' => ['required', 'string', 'max:255'],
             'numeroIdentificacion' => ['required', 'string', 'max:255'],
-            'ciudadExpedicion' => ['required', 'string', 'max:255'],
+            // pais
+            'country' => ['required', 'string', 'max:255'],
+            // departamento
+            'department' => ['required', 'string', 'max:255'],
+            // ciudad
+            'city' => ['required', 'string', 'max:255'],
             'id_nivelEstudio' => ['required', 'string', 'max:255'],
             'id_genero' => ['required', 'string', 'max:255'],
             'id_ocupacion' => ['required', 'string', 'max:255'],
@@ -38,6 +43,9 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
+
+        // Combinar los valores de país, departamento y ciudad en una sola columna
+    $ciudadExpedicion = "{$input['country']}, {$input['department']}, {$input['city']}";
 
         return User::create([
             'name' => $input['name'],
@@ -49,7 +57,7 @@ class CreateNewUser implements CreatesNewUsers
             'id_tipoSolicitante' => $input['id_tipoSolicitante'],
             'id_tipoDocumento' => $input['id_tipoDocumento'],
             'numeroIdentificacion' => $input['numeroIdentificacion'],
-            'ciudadExpedicion' => $input['ciudadExpedicion'],
+            'ciudadExpedicion' => $ciudadExpedicion, // Guardar la combinación en una sola columna
             'id_nivelEstudio' => $input['id_nivelEstudio'],
             'id_genero' => $input['id_genero'],
             'id_ocupacion' => $input['id_ocupacion'],
