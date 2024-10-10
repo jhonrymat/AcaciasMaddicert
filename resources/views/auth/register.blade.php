@@ -9,43 +9,43 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
+                <x-label for="name" value="Primer nombre" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
                     autofocus autocomplete="name" />
             </div>
             {{-- nombre_2 --}}
             <div>
-                <x-label for="nombre_2" value="{{ __('nombre_2') }}" />
+                <x-label for="nombre_2" value="Segundo nombre" />
                 <x-input id="nombre_2" class="block mt-1 w-full" type="text" name="nombre_2" :value="old('nombre_2')"
                     required autofocus autocomplete="nombre_2" />
             </div>
             {{-- apellido_1 --}}
             <div>
-                <x-label for="apellido_1" value="{{ __('Apellido_1') }}" />
+                <x-label for="apellido_1" value="Primer apellido" />
                 <x-input id="apellido_1" class="block mt-1 w-full" type="text" name="apellido_1" :value="old('apellido_1')"
                     required autofocus autocomplete="apellido_1" />
             </div>
             {{-- apellido_2 --}}
             <div>
-                <x-label for="apellido_2" value="{{ __('Apellido_2') }}" />
+                <x-label for="apellido_2" value="Según apellido" />
                 <x-input id="apellido_2" class="block mt-1 w-full" type="text" name="apellido_2" :value="old('apellido_2')"
                     required autofocus autocomplete="apellido_2" />
             </div>
 
             <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
+                <x-label for="email" value="Correo electrónico" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
                     required autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
+                <x-label for="password" value="Contraseña" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
                     autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <x-label for="password_confirmation" value="Confirme la contraseña" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
                     name="password_confirmation" required autocomplete="new-password" />
             </div>
