@@ -29,11 +29,8 @@ class CreateNewUser implements CreatesNewUsers
             'id_tipoSolicitante' => ['required', 'string', 'max:255'],
             'id_tipoDocumento' => ['required', 'string', 'max:255'],
             'numeroIdentificacion' => ['required', 'string', 'max:255'],
-            // pais
             'country' => ['required', 'string', 'max:255'],
-            // departamento
             'department' => ['required', 'string', 'max:255'],
-            // ciudad
             'city' => ['required', 'string', 'max:255'],
             'id_nivelEstudio' => ['required', 'string', 'max:255'],
             'id_genero' => ['required', 'string', 'max:255'],
@@ -45,9 +42,9 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         // Combinar los valores de país, departamento y ciudad en una sola columna
-    $ciudadExpedicion = "{$input['country']}, {$input['department']}, {$input['city']}";
+        $ciudadExpedicion = "{$input['country']}, {$input['department']}, {$input['city']}";
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'nombre_2' => $input['nombre_2'],
             'apellido_1' => $input['apellido_1'],
@@ -57,7 +54,7 @@ class CreateNewUser implements CreatesNewUsers
             'id_tipoSolicitante' => $input['id_tipoSolicitante'],
             'id_tipoDocumento' => $input['id_tipoDocumento'],
             'numeroIdentificacion' => $input['numeroIdentificacion'],
-            'ciudadExpedicion' => $ciudadExpedicion, // Guardar la combinación en una sola columna
+            'ciudadExpedicion' => $ciudadExpedicion,
             'id_nivelEstudio' => $input['id_nivelEstudio'],
             'id_genero' => $input['id_genero'],
             'id_ocupacion' => $input['id_ocupacion'],
@@ -65,5 +62,8 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $user->assignRole('user');
+        return $user;
     }
 }
