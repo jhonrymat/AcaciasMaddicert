@@ -13,6 +13,7 @@ use App\Http\Livewire\SolicitudesComponent;
 use App\Http\Livewire\TipoSolicitanteComponent;
 use App\Http\Livewire\OcupacionComponent;
 use App\Http\Livewire\PoblacionComponent;
+use \App\Http\Livewire\UserRoleComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ Route::middleware(['can:formulario'])->get('formulario', FormularioComponent::cl
 Route::middleware(['can:ocupacion'])->get('ocupacion', OcupacionComponent::class)->name('ocupacion');
 Route::middleware(['can:poblacion'])->get('poblacion', PoblacionComponent::class)->name('poblacion');
 Route::middleware(['can:versolicitudes'])->get('versolicitudes', SolicitudesComponent::class)->name('versolicitudes');
-
+Route::middleware(['can:user-roles'])->get('/user-roles', UserRoleComponent::class)->name('user-roles');
 
 Route::middleware([
     'auth:sanctum',

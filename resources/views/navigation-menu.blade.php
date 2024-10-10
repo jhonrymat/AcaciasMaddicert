@@ -64,6 +64,12 @@
                         <x-nav-link href="{{ route('solicitudes') }}" :active="request()->routeIs('solicitudes')">
                             {{ __('solicitudes') }}
                         </x-nav-link>
+                        <x-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
+                            {{ __('Gestión de Roles') }}
+                        </x-nav-link> 
+                        <x-nav-link href="{{ route('user-roles') }}" :active="request()->routeIs('user-roles')">
+                            {{ __('Gestión de Roles para usuarios') }}
+                        </x-nav-link> 
                     @endrole
                     @role('user')
                         <x-nav-link href="{{ route('formulario') }}" :active="request()->routeIs('formulario')">
