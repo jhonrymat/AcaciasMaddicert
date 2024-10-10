@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Livewire;
 
 use Livewire\Component;
@@ -10,22 +9,32 @@ class RolesComponent extends Component
 {
     public $name;
     public $role_id;
-    public $permissions = [];
+    public $permissionIds = [];
+    public $isEditing = false;
+    public $selectedRole;
+    public $showRoleDetails = false;
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'permissions' => 'required|array',
+        'permissionIds' => 'array',
     ];
 
-    public function createRole()
+    public function createOrUpdateRole()
     {
         $this->validate();
 
-        $role = Role::create(['name' => $this->name]);
+        if ($this->isEditing) {
+            $role = Role::findOrFail($this->role_id);
+            $role->name = $this->name;
+            $role->save();
+        } else {
+            $role = Role::create(['name' => $this->name]);
+        }
 
-        $role->syncPermissions($this->permissions);
+        $permissions = Permission::whereIn('id', $this->permissionIds)->get();
+        $role->syncPermissions($permissions);
 
-        session()->flash('message', 'Role creado exitosamente.');
+        session()->flash('message', $this->isEditing ? 'Rol actualizado exitosamente.' : 'Rol creado exitosamente.');
         $this->resetFields();
     }
 
@@ -34,40 +43,54 @@ class RolesComponent extends Component
         $role = Role::findOrFail($id);
         $this->role_id = $role->id;
         $this->name = $role->name;
-        $this->permissions = $role->permissions->pluck('name')->toArray();
+        $this->permissionIds = $role->permissions->pluck('id')->toArray();
+        $this->isEditing = true;
+        $this->showRoleDetails = false;
     }
 
-    public function updateRole()
+    public function showRoleDetails($id)
     {
-        $this->validate();
+        $this->selectedRole = Role::with('permissions')->findOrFail($id);
+        $this->showRoleDetails = true;
+        $this->isEditing = false;
+    }
 
-        $role = Role::findOrFail($this->role_id);
-        $role->name = $this->name;
-        $role->syncPermissions($this->permissions);
-        $role->save();
+    public function hideRoleDetails()
+    {
+        $this->showRoleDetails = false;
+        $this->selectedRole = null;
+    }
 
-        session()->flash('message', 'Role actualizado exitosamente.');
+    public function cancelEdit()
+    {
         $this->resetFields();
     }
 
     public function deleteRole($id)
     {
         Role::findOrFail($id)->delete();
-        session()->flash('message', 'Role eliminado exitosamente.');
+        session()->flash('message', 'Rol eliminado exitosamente.');
+        $this->resetFields();
     }
 
     public function resetFields()
     {
         $this->name = '';
-        $this->permissions = [];
+        $this->permissionIds = [];
         $this->role_id = null;
+        $this->isEditing = false;
+        $this->showRoleDetails = false;
+        $this->selectedRole = null;
     }
 
     public function render()
     {
+        $roles = Role::all();
+        $allPermissions = Permission::all();
+   
         return view('livewire.roles-component', [
-            'roles' => Role::all(),
-            'permissions' => Permission::all(),
+            'roles' => $roles,
+            'allPermissions' => $allPermissions,
         ]);
     }
 }

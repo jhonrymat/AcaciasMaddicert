@@ -49,6 +49,7 @@ class RolesAndPermissionsTenantSeeder extends Seeder
             'ocupacion',
             'roles',
             'permisos',
+            'user-roles'
         ];
         $permissionsUser = [
             'formulario',
