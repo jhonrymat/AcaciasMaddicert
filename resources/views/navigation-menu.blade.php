@@ -64,12 +64,8 @@
                         <x-nav-link href="{{ route('solicitudes') }}" :active="request()->routeIs('solicitudes')">
                             {{ __('solicitudes') }}
                         </x-nav-link>
-                        <x-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
-                            {{ __('Gestión de Roles') }}
-                        </x-nav-link> 
-                        <x-nav-link href="{{ route('user-roles') }}" :active="request()->routeIs('user-roles')">
-                            {{ __('Gestión de Roles para usuarios') }}
-                        </x-nav-link> 
+                       
+                       
                     @endrole
                     @role('user')
                         <x-nav-link href="{{ route('formulario') }}" :active="request()->routeIs('formulario')">
@@ -215,6 +211,12 @@
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
                             </div>
+                            <x-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
+                                {{ __('Gestión de Roles') }}
+                            </x-nav-link> 
+                            <x-nav-link href="{{ route('user-roles') }}" :active="request()->routeIs('user-roles')">
+                                {{ __('Gestión de Roles para usuarios') }}
+                            </x-nav-link> 
 
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
