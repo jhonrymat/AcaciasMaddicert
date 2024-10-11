@@ -49,8 +49,24 @@
 
             <!-- Modal -->
             <!-- Campo de dirección fuera del modal, parte del formulario -->
-            <div class="mb-2 mt-4">
+            <div class="mt-4 mb-4 relative">
+                <div class="flex items-center">
                 <x-label class="block text-sm font-medium">Dirección*</x-label>
+                <!-- Ícono de pregunta -->
+                <div class="ml-1 tooltip">
+                    <a href="#" class="hover:text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                        </svg>
+                    </a>
+                    <div
+                        class="absolute left-5 top-0 z-10 w-48 p-2 mt-2 text-sm text-gray-700 bg-white border border-gray-300 rounded shadow-lg invisible tooltip-item">
+                        Llené este campo con el barrio donde esta su casa.
+                    </div>
+                </div>
+                </div>
                 <div class="w-full mb-4 flex items-center">
                     <x-input type="text" wire:model="direccion" id="direccionInput"
                         class="w-full rounded-lg border border-gray-400 p-2" placeholder="Seleccione su dirección"
@@ -323,8 +339,24 @@
             <!-- Modal con Alpine.js y Livewire -->
 
             {{-- barrio --}}
-            <div class="mb-4">
-                <x-label for="id_barrio" class="block text-sm font-medium">Barrio</x-label>
+            <div class="mb-4 relative">
+                <div class="flex items-center">
+                    <x-label for="id_barrio" class="block text-sm font-medium">Barrio</x-label>
+                    <!-- Ícono de pregunta -->
+                    <div class="ml-1 tooltip">
+                        <a href="#" class="hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                            </svg>
+                        </a>
+                        <div
+                            class="absolute left-5 top-0 z-10 w-48 p-2 mt-2 text-sm text-gray-700 bg-white border border-gray-300 rounded shadow-lg invisible tooltip-item">
+                            Llené este campo con la dirección de su casa.
+                        </div>
+                    </div>
+                </div>
                 <select name="id_barrio" id="id_barrio" wire:model="id_barrio" class="block mt-1 w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Selecciona un barrio</option>
                     @foreach ($barrios as $barrio)
@@ -338,18 +370,34 @@
 
 
             {{-- observaciones --}}
-            <div class="mb-4">
+            <div class="mb-4 relative">
+                <div class="flex flex-wrap items-center">
                 <x-label for="observaciones" class="block text-sm font-medium">Observaciones</x-label>
+                <!-- Ícono de pregunta -->
+                <div class="ml-1 tooltip">
+                    <a href="#" class="hover:text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                        </svg>
+                    </a>
+                    <div
+                        class="absolute left-5 top-0 z-10 w-48 p-2 mt-2 text-sm text-gray-700 bg-white border border-gray-300 rounded shadow-lg invisible tooltip-item">
+                        Algo que quieras agregar de mas.
+                    </div>
+                </div>
                 <textarea id="observaciones" wire:model="observaciones" class="mt-1 block w-full border border-gray-300 rounded-lg"></textarea>
                 @error('observaciones')
                     <span class="text-red-500">{{ $message }}</span>
                 @enderror
+                </div>
             </div>
 
 
 
             {{-- anexos --}}
-            <div>
+            <div class="relative">
                 <label for="dropzone-file"
                     class="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500" fill="none"
@@ -366,6 +414,20 @@
                     </p>
 
                     <input id="dropzone-file" type="file" wire:model="anexos" multiple class="hidden" />
+                    <!-- Ícono de pregunta -->
+                    <div class="ml-1 tooltip">
+                        <a href="#" class="hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                            </svg>
+                        </a>
+                        <div
+                            class="absolute left-auto top-auto z-10 w-48 p-2 mt-2 text-sm text-gray-700 bg-white border border-gray-300 rounded shadow-lg invisible tooltip-item">
+                            Agregue aquí el anexo obligatorio. {{-- jhon aqui no se bien que texto poner --}}
+                        </div>
+                    </div>
                     @error('anexos')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror

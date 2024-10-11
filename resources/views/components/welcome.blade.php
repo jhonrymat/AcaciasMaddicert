@@ -38,12 +38,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
             </svg>
             <h2 class="ml-3 text-xl font-semibold text-gray-900">
-                <a href="https://laracasts.com">Laracasts</a>
+                <a href="https://laracasts.com">Segundo</a>
             </h2>
         </div>
 
         <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-            Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
+            Una vez que hayan completado su solicitud, podrán hacer un seguimiento del estado de todas sus solicitudes. Para ello, diríjanse nuevamente al encabezado y seleccionen el campo 'Solicitudes'. Allí verán el progreso y los detalles de cada una de sus solicitudes.
         </p>
 
     </div>
