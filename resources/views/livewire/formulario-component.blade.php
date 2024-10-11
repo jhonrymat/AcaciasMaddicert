@@ -348,7 +348,7 @@
 
 
 
-            {{-- anexos --}}
+            {{-- evidenciaPDF --}}
             <div>
                 <label for="dropzone-file"
                     class="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center">
@@ -365,8 +365,8 @@
                         .swf .xls .xlsm .xlsx .zip
                     </p>
 
-                    <input id="dropzone-file" type="file" wire:model="anexos" multiple class="hidden" />
-                    @error('anexos')
+                    <input id="dropzone-file" type="file" wire:model="evidenciaPDF" multiple class="hidden" />
+                    @error('evidenciaPDF')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
             </div>

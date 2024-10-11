@@ -29,7 +29,7 @@ class SolicitudComponent extends Component
     public $existingPDF;
     public $showForm = false;
 
-    
+
 
     protected $rules = [
         'fechaSolicitud' => 'required|date',
@@ -44,7 +44,7 @@ class SolicitudComponent extends Component
     protected $listeners = ['edit', 'delete'];
 
 
-    
+
 
     public function save()
     {
@@ -103,7 +103,7 @@ class SolicitudComponent extends Component
             $this->showForm = true;
         }
     }
-    
+
 
     public function create()
     {
@@ -132,15 +132,15 @@ class SolicitudComponent extends Component
     }
 
 //datos del model
-    
+
     public function render()
     {
-        
-       
+
+
          return view('livewire.solicitud-component', [
             'solicitudes' => Solicitud::with('barrio', 'direccion'), // Paginación de 10 elementos
-            
-           
+
+
         ]);
     }
 }

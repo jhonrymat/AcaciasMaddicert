@@ -37,8 +37,7 @@ class FormularioComponent extends Component
     public $numeroIdentificacion = '';
     public $id_barrio = '';
     public $direccion = '';
-    public $ubicacion = '';
-    public $anexos = '';
+    public $evidenciaPDF = [];
     public $terminos = '';
     public $observaciones = '';
 
@@ -50,8 +49,8 @@ class FormularioComponent extends Component
         'numeroIdentificacion' => 'required|string|min:3',
         'id_barrio' => 'required',
         'direccion' => 'required|string|min:3',
-        'ubicacion' => 'required|string',
-        'anexos.*' => 'required|file|mimes:pdf,jpeg,png,jpg,doc,docx|max:10240',
+        'evidenciaPDF' => 'required', // Asegúrate de que el array esté presente
+        'evidenciaPDF.*' => 'file|mimes:pdf,jpeg,png,jpg,doc,docx|max:10240', // Valida cada archivo individualmente
         'terminos' => 'required',
         'observaciones' => 'required|string',
     ];
@@ -61,11 +60,10 @@ class FormularioComponent extends Component
         'id_barrio.required' => 'El campo barrio es obligatorio.',
         'direccion.required' => 'El campo dirección es obligatorio.',
         'direccion.min' => 'El campo dirección debe tener al menos 3 caracteres.',
-        'ubicacion.required' => 'El campo ubicación es obligatorio.',
-        'anexos.required' => 'El campo anexos es obligatorio.',
-        'anexos.file' => 'El campo anexos debe ser un archivo.',
-        'anexos.mimes' => 'El campo anexos debe ser un archivo de tipo: pdf, jpeg, png, jpg, doc, docx.',
-        'anexos.max' => 'El campo anexos no debe ser mayor a 10MB.',
+        'evidenciaPDF.required' => 'El campo evidencia es obligatorio.',
+        'evidenciaPDF.file' => 'El campo evidencia debe ser un archivo.',
+        'evidenciaPDF.mimes' => 'El campo evidencia debe ser un archivo de tipo: pdf, jpeg, png, jpg, doc, docx.',
+        'evidenciaPDF.max' => 'El campo evidencia no debe ser mayor a 10MB.',
         'terminos.required' => 'El campo términos es obligatorio.',
         'observaciones.required' => 'El campo observaciones es obligatorio.',
         'observaciones.string' => 'El campo observaciones debe ser una cadena de texto.',
@@ -77,16 +75,16 @@ class FormularioComponent extends Component
         $validatedData = $this->validate();
 
         // Si hay archivos adjuntos
-        if ($this->anexos) {
+        if ($this->evidenciaPDF) {
             // Crear un array para almacenar las rutas de los archivos
-            $anexosPaths = [];
+            $evidenciaPDFPaths = [];
 
             // Recorrer cada archivo y guardarlo
-            foreach ($this->anexos as $anexo) {
-                // Guardar el archivo en la carpeta 'anexos' y obtener su ruta
-                $path = $anexo->store('anexos', 'public');
+            foreach ($this->evidenciaPDF as $anexo) {
+                // Guardar el archivo en la carpeta 'evidenciaPDF' y obtener su ruta
+                $path = $anexo->store('evidenciaPDF', 'public');
                 // Almacenar la ruta del archivo
-                $anexosPaths[] = $path;
+                $evidenciaPDFPaths[] = $path;
             }
         }
         // Create a new solicitud
@@ -95,8 +93,7 @@ class FormularioComponent extends Component
             'numeroIdentificacion' => $this->numeroIdentificacion,
             'id_barrio' => $this->id_barrio, // Assuming barrio is 1 for now, replace with actual value
             'direccion' => $this->direccion,
-            'ubicacion' => $this->ubicacion, // Replace with actual data if applicable
-            'evidenciaPDF' => json_encode($anexosPaths),  // Guardar las rutas de los archivos en la base de datos
+            'evidenciaPDF' => json_encode($evidenciaPDFPaths),  // Guardar las rutas de los archivos en la base de datos
             'observaciones' => $this->observaciones,
             'terminos' => $this->terminos,
         ]);
