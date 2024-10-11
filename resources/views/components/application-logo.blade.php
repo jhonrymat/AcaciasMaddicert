@@ -1,1 +1,1 @@
-<img class="rounded-full" src="{{ asset('images/logo-web-192x192.png') }}" alt="Logo">
+<img class="rounded-full max-md:mx-auto" src="{{ asset('images/logo-web-192x192.png') }}" alt="Logo">
