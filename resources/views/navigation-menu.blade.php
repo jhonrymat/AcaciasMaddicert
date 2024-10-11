@@ -135,7 +135,7 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <!-- Teams Dropdown -->
+                <!-- Menú desplegable de equipos -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
                         <x-dropdown align="right" width="60">
@@ -153,12 +153,12 @@
 
                             <x-slot name="content">
                                 <div class="w-60">
-                                    <!-- Team Management -->
+                                    <!-- Gestión de equipos -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
                                         {{ __('Manage Team') }}
                                     </div>
 
-                                    <!-- Team Settings -->
+                                    <!-- Configuración del equipo -->
                                     <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
                                         {{ __('Team Settings') }}
                                     </x-dropdown-link>
@@ -171,7 +171,7 @@
 
                                     <div class="border-t border-gray-200"></div>
 
-                                    <!-- Team Switcher -->
+                                    <!-- Cambiador de equipo -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
                                         {{ __('Switch Teams') }}
                                     </div>
@@ -185,7 +185,7 @@
                     </div>
                 @endif
 
-                <!-- Settings Dropdown -->
+                <!-- Menú desplegable de configuración -->
                 <div class="ml-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -207,9 +207,9 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <!-- Account Management -->
+                            <!-- Gestión de cuentas -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Administrar cuenta') }}
                             </div>
                             <x-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
                                 {{ __('Gestión de Roles') }}
@@ -230,7 +230,7 @@
 
                             <div class="border-t border-gray-200"></div>
 
-                            <!-- Authentication -->
+                            <!-- Autenticación -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
@@ -244,7 +244,7 @@
                 </div>
             </div>
 
-            <!-- Hamburger -->
+            <!-- Hamburguesa -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -280,7 +280,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <!-- Account Management -->
+                <!-- Gestión de cuentas -->
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
@@ -309,7 +309,7 @@
                     </x-responsive-nav-link>
                 </form>
 
-                <!-- Team Management -->
+                <!-- Gestión de equipos -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="border-t border-gray-200"></div>
 
@@ -317,7 +317,7 @@
                         {{ __('Manage Team') }}
                     </div>
 
-                    <!-- Team Settings -->
+                   <!-- Configuración del equipo -->
                     <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
                         {{ __('Team Settings') }}
                     </x-responsive-nav-link>
@@ -330,7 +330,7 @@
 
                     <div class="border-t border-gray-200"></div>
 
-                    <!-- Team Switcher -->
+                    <!-- Cambiador de equipo -->
                     <div class="block px-4 py-2 text-xs text-gray-400">
                         {{ __('Switch Teams') }}
                     </div>
