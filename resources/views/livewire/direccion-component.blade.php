@@ -3,7 +3,7 @@
     <button @click="showModal = true" class="px-4 py-2 bg-blue-500 text-white rounded">Agregar Dirección</button>
 
     <!-- Modal de Direcciones -->
-    <div x-show="showModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <div x-show="showModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" x-cloak>
         <div class="relative top-20 mx-auto p-5 border w-1/2 shadow-lg rounded-md bg-white">
             <div class="modal-header">
                 <h5 class="text-lg font-bold">Seleccione su dirección</h5>

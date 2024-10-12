@@ -33,35 +33,37 @@ class SolicitudDatatable extends DataTableComponent
             Column::make("Usuario", "user.name")
                 ->sortable()
                 ->searchable(),
-            
-            
+
+
             Column::make("Número de Identificación", "numeroIdentificacion")
                 ->sortable()
-                ->searchable(),
-           
+                ->searchable()
+                ->collapseOnMobile(),
+
             Column::make("Barrio", "barrio.nombreBarrio")
                 ->sortable()
-                ->searchable(), // Relacionado con la tabla de barrios
+                ->searchable() // Relacionado con la tabla de barrios
+                ->collapseOnMobile(),
             Column::make("Dirección", "direccion")
                 ->sortable()
-                ->searchable(), // Relacionado con la tabla de direcciones
-            Column::make("Ubicación", "ubicacion")
-                ->sortable()
-                ->searchable(),
+                ->searchable() // Relacionado con la tabla de direcciones
+                ->collapseOnMobile(),
             Column::make("Evidencia PDF", "evidenciaPDF")
                 ->label(
                     fn($row) => $row->evidenciaPDF
                     ? '<a href="' . Storage::url($row->evidenciaPDF) . '" target="_blank" class="text-blue-500">Ver archivo</a>'
                     : 'No disponible'
                 )
-                ->html(),
+                ->html()
+                ->collapseOnMobile(),
             Column::make("Created at", "created_at")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Acciones")
                 ->label(
                     fn($row) => view('livewire.acciones', ['row' => $row])
-                )
+                )->collapseOnMobile(),
         ];
     }
 }

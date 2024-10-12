@@ -34,20 +34,24 @@ class DireccionDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("Unidad", "unidad")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Unidad", "numero")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Tipo", "tipo")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Created at", "created_at")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Acciones")
                 ->label(
                     fn($row) => view('livewire.acciones', ['row' => $row])
-                )
+                )->collapseOnMobile(),
         ];
     }
 }

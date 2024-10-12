@@ -15,7 +15,6 @@ class Solicitud extends Model
         'numeroIdentificacion',
         'id_barrio',
         'direccion',
-        'ubicacion',
         'evidenciaPDF',
         'observaciones',
         'terminos',

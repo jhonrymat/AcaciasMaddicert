@@ -22,6 +22,13 @@ class SolicitudesDatatable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setDefaultSort('id', 'desc');
         $this->setSingleSortingStatus(false);
+
+        $this->setTableWrapperAttributes([
+            'class' => 'max-h-56 md:max-h-72 lg:max-h-96 overflow-y-scroll',
+            ]);
+        $this->setTheadAttributes([
+            'class' => 'sticky top-0 '
+        ]);
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
@@ -67,19 +74,20 @@ class SolicitudesDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("# Identificación", "numeroIdentificacion")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Barrio", "barrio.nombreBarrio")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Direccion", "direccion")
                 ->sortable()
-                ->searchable(),
-            Column::make("Ubicación", "ubicacion")
-                ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Creado", "created_at")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
                 Column::make("Anexos", "evidenciaPDF")
                 ->format(function ($value, $row) {
                     $files = json_decode($value); // Convierte el valor JSON a un array
@@ -93,12 +101,14 @@ class SolicitudesDatatable extends DataTableComponent
                 })
                 ->html() // Importante: Permite la interpretación del HTML en la columna
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
 
             Column::make("Acciones")
                 ->label(
                     fn($row) => view('livewire.view', ['row' => $row])
                 )
+                ->collapseOnMobile(),
         ];
     }
 }

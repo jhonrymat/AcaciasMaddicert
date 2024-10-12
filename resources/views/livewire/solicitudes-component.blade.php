@@ -8,7 +8,7 @@
 
     <!-- Modal con Alpine.js -->
 <!-- Modal con Alpine.js -->
-<div x-data="{ showModal: @entangle('showForm') }">
+<div x-data="{ showModal: @entangle('showForm') }" x-cloak>
     <!-- Overlay para el modal -->
     <div x-show="showModal" class="fixed inset-0 bg-gray-800 bg-opacity-70 flex items-center justify-center">
         <div class="bg-white w-11/12 sm:max-w-lg md:max-w-3xl lg:max-w-5xl p-6 rounded-lg shadow-lg max-h-screen overflow-y-auto">

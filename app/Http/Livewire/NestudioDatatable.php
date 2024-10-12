@@ -31,14 +31,16 @@ class NestudioDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("Nivel de estudio", "nivelEstudio")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Created at", "created_at")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Acciones")
                 ->label(
                     fn($row) => view('livewire.acciones', ['row' => $row])
-                )
+                )->collapseOnMobile(),
         ];
     }
 }

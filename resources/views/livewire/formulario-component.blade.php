@@ -107,7 +107,7 @@
                             direccionGenerada: '',
                                 $wire.set('direccion', ''); // Limpia el campo de dirección fuera del modal
                         }
-                    }">
+                    }" x-cloak>
                         <button type="button" @click="modelOpen = true"
                             class="ml-2 rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
@@ -396,8 +396,9 @@
 
 
 
-            {{-- anexos --}}
-            <div class="relative">
+
+            {{-- evidenciaPDF --}}
+            <div>
                 <label for="dropzone-file"
                     class="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500" fill="none"
@@ -413,7 +414,8 @@
                         .swf .xls .xlsm .xlsx .zip
                     </p>
 
-                    <input id="dropzone-file" type="file" wire:model="anexos" multiple class="hidden" />
+
+                    <input id="dropzone-file" type="file" wire:model="evidenciaPDF" multiple class="hidden" />
                     <!-- Ícono de pregunta -->
                     <div class="ml-1 tooltip">
                         <a href="#" class="hover:text-gray-400">
@@ -428,7 +430,8 @@
                             Agregue aquí el anexo obligatorio. {{-- jhon aqui no se bien que texto poner --}}
                         </div>
                     </div>
-                    @error('anexos')
+                    
+                    @error('evidenciaPDF')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
             </div>

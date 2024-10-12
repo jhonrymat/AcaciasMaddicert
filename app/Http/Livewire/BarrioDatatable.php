@@ -34,20 +34,24 @@ class BarrioDatatable extends DataTableComponent
                 ->searchable(),
                 Column::make("Tipo unidad", "tipoUnidad")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Unidad", "codigoNumero")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Zona", "zona")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Created at", "created_at")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Acciones")
                 ->label(
                     fn($row) => view('livewire.acciones', ['row' => $row])
-                )
+                )->collapseOnMobile(),
         ];
     }
 }
