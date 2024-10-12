@@ -31,14 +31,16 @@ class PoblacionDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("Poblacion", "nombrePoblacion")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Created at", "created_at")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnMobile(),
             Column::make("Acciones")
                 ->label(
                     fn($row) => view('livewire.acciones', ['row' => $row])
-                )
+                )->collapseOnMobile(),
         ];
     }
 }
